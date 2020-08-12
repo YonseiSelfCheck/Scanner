@@ -30,7 +30,7 @@ public class QRScannerActivity extends AppCompatActivity {
     CameraSource cameraSource;
     SurfaceView cameraSurface;
     String resultCode;
-    TextView device_list;
+    TextView QRcodeInfo;
     Intent getIntent;
     private View progressView;
 
@@ -44,7 +44,7 @@ public class QRScannerActivity extends AppCompatActivity {
         setContentView(R.layout.qr_scanner);
         getIntent = getIntent();
         getCameraPermission();
-        device_list = (TextView) findViewById(R.id.view_info_barcode);
+        QRcodeInfo = (TextView) findViewById(R.id.view_info_barcode);
         cameraSurface = (SurfaceView) findViewById(R.id.cameraSurface);
         final BarcodeDetector barcodeDetector = new BarcodeDetector.Builder(this)
                 .setBarcodeFormats(Barcode.QR_CODE)
@@ -100,14 +100,15 @@ public class QRScannerActivity extends AppCompatActivity {
                 String serial = "";
                 if (barcodes.size() != 0) {
                     String barcodeContents = barcodes.valueAt(0).displayValue; // 바코드 인식 결과물
+                    //TODO 일단 QR 읽었으니까 setText지우고 관리자정보+QR데이터+날짜 HashMap에 붙이고 Json으로 ㄱㄱ
+                    QRcodeInfo.setText(barcodeContents);
                     barcode.add(barcodeContents);
-                    device_list.setText(barcodeContents);
                     Log.e("size", String.valueOf(barcode_result.size()));
 
                 }
             }
         });
-        device_list.setOnClickListener(new View.OnClickListener() {
+        QRcodeInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //TODO 이거 HTTP로 쏠 부분

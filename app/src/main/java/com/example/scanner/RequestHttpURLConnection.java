@@ -18,6 +18,7 @@ public class RequestHttpURLConnection {
         //URL뒤에 붙여 보낼 파라미터
         StringBuffer sbParams = new StringBuffer();
 
+        //TODO HTTP 통신
         /**
          * 1. StringBuffer에 파라미터 연결
          */
